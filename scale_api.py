@@ -13,28 +13,11 @@ def install_dependencies():
     """
     Installs required Python packages and ensures ngrok is installed.
     """
-    packages = ["flask", "pyserial", "pyngrok"]
-    
     try:
-        # Upgrade pip to the latest version
-        print("Upgrading pip...")
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "--upgrade", "pip"])
-        
-        # Install required packages
         print("Installing required Python packages...")
-        for package in packages:
-            try:
-                subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-                print(f"Package '{package}' installed successfully.")
-            except subprocess.CalledProcessError as e:
-                print(f"Error installing package '{package}': {e}")
-                continue  # Skip this package and proceed with the others
-        
-        # Ensure ngrok is installed and setup (if needed)
-        print("Ensuring ngrok is installed...")
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "pyngrok"])
-
-        print("All dependencies installed successfully.")
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "--upgrade", "pip"])
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "flask", "pyserial", "pyngrok"])
+        print("Dependencies installed successfully.")
     except subprocess.CalledProcessError as e:
         print(f"Error installing dependencies: {e}")
         sys.exit(1)
